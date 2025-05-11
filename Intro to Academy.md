@@ -110,7 +110,7 @@
 
 Вы можете запустить рабочую станцию, нажав на кнопку `Start Instance` (Запустить экземпляр), которая находится в конце любого интерактивного раздела и/или в блоке `My Workstation` (Моя рабочая станция) справа на экране, как показано ниже:
 
-![GIF, демонстрирующий процесс запуска предоставленной рабочей станции в Academy](https://academy.hackthebox.com/storage/modules/15/pwnbox_solving_question.gif)
+![HTB GIF](https://github.com/yourname/repo/raw/main/images/pwnbox.gif)
 
 ## Завершение раздела
 
