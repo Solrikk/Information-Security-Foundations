@@ -237,7 +237,7 @@ LAN (Local Area Network, Локальная сеть) и WLAN (Wireless Local Ar
 
 #### Топология "Точка-точка"
 
-![Диаграмма, показывающая соединение между двумя хостами](https://academy.hackthebox.com/storage/modules/34/topo_p2p.png)
+![д](https://academy.hackthebox.com/storage/modules/34/redesigned/topo_p2p.png)
 
 ---
 
