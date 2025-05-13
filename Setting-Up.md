@@ -1454,3 +1454,243 @@ Verification code: <Google-Auth Code>
 ---
 
 Теперь мы должны иметь представление об использовании распространенных платформ виртуализации, таких как VMWare Workstation/Player и VirtualBox, и быть уверенными в настройке виртуальных машин с нуля. После практики примеров в этом модуле мы также должны быть уверены в настройке и защите как Windows, так и Linux машин для наших целей пентестинга. Наконец, стоит повторить шаги по настройке VPS с помощью провайдера, такого как Vultr, и попрактиковаться в его защите на основе шагов в этом разделе. Для нас важно уметь настраивать, защищать и поддерживать системы, которые мы используем во время наших оценок.
+
+
+
+
+
+# Эмулятор терминала
+
+---
+
+Для нас крайне важно работать в терминале. Выбор терминала также сильно влияет на нашу эффективность и продуктивность. Существует множество эмуляторов терминала, каждый из которых предоставляет различные функции, хорошо подходящие для разных целей. Есть много вариантов на выбор, каждый разработан со своими принципами и направленностью. Некоторые из них предоставляют решение всё-в-одном, в то время как другие сосредоточены на скорости или настройке.
+
+| [Alacritty](https://alacritty.org/) | [Ghostty](https://ghostty.org/) | [Wave Terminal](https://www.waveterm.dev/) |
+|-------------------------------------|--------------------------------|-------------------------------------------|
+
+[Ghostty](https://ghostty.org/) фокусируется на скорости и производительности, при этом позволяя настраивать самые необходимые части и предоставляя множество функций.
+
+[Alacritty](https://alacritty.org/) с другой стороны, фокусируется на минимализме и производительности, что делает его очень быстрым благодаря ускорению GPU, но предоставляет меньше возможностей для настройки.
+
+[Wave Terminal](https://www.waveterm.dev/) — это визуально потрясающий новый AI-нативный эмулятор терминала, разработанный для рабочих процессов разработчиков, с упором на современный интерфейс, встроенную визуализацию и постоянные сессии, но требует гораздо больше ресурсов, что может сделать его медленнее.
+
+Настоятельно рекомендуется экспериментировать с новыми настройками и инструментами сначала на локальной ВМ, имеющей снимок системы, к которому вы всегда можете вернуться, если что-то пойдет не так. Поэтому мы будем использовать другую ВМ в следующих примерах, а затем применим эти настройки позже.
+
+---
+
+## Wave Terminal
+
+Wave Terminal — это инновационный эмулятор терминала, созданный для разработчиков, который призван улучшить рабочие процессы за счет интеграции современных функций, управляемых ИИ, с традиционными возможностями командной строки. Одно из главных преимуществ этого терминала в том, что у вас всё в одном месте (включая браузер на основе Chromium), что уменьшает необходимость переключения между различными окнами.
+
+Давайте [загрузим](https://www.waveterm.dev/download) этот терминал, установим его и рассмотрим поближе.
+
+![Кнопка загрузки для Linux .snap x64 с командой: sudo snap install --classic waveterm.](https://academy.hackthebox.com/storage/modules/87/term1.png)
+
+Для установки Wave Terminal на Ubuntu мы можем использовать пакетный менеджер `snap`.
+
+```shell-session
+cry0l1t3@ubuntu:~$ sudo snap install --classic waveterm
+[sudo] password for cry0l1t3:  *********************
+
+waveterm 0.11.2 from Command Line Inc (commandlinedev✓) installed
+
+cry0l1t3@ubuntu:~$ waveterm
+```
+
+Wave Terminal предоставляет множество различных сочетаний клавиш, которые повышают скорость и продуктивность после того, как вы с ними познакомитесь. Вас встретит всплывающее окно, показывающее некоторые из сочетаний клавиш, которые позже можно изменить.
+
+![Иконки и сочетания клавиш для Wave Terminal: Подключение к серверу, увеличение блока, настройки блока, закрытие блока, новая вкладка, новый блок терминала, навигация и переключение между блоками и вкладками, команды wsh.](https://academy.hackthebox.com/storage/modules/87/term2.png)
+
+Когда мы впервые запускаем Wave Terminal, мы увидим следующие компоненты:
+
+* Командная строка
+* Монитор производительности
+* Браузер
+* Файловый менеджер
+* Страница советов
+* Страница помощи
+* Окно чата с ИИ
+
+![Интерфейс Wave Terminal, показывающий терминал, график CPU, страницу GitHub, каталог файлов и комбинации клавиш.](https://academy.hackthebox.com/storage/modules/87/term3.png)
+
+Если мы посмотрим на [документацию](https://docs.waveterm.dev/), там есть 6 основных разделов, которые обеспечивают лучшее понимание того, что можно делать с этим эмулятором терминала.
+
+* Настройка
+* Комбинации клавиш
+* Макет
+* Удаленные подключения
+* Виджеты
+* Команда Wsh
+
+![Меню документации Wave Terminal с разделами: Настройка, Комбинации клавиш, Макет, Удаленные подключения, Виджеты, команда wsh.](https://academy.hackthebox.com/storage/modules/87/term4.png)
+
+Поскольку Wave Terminal использует компоненты ReactJS, это делает его высоко настраиваемым с точки зрения дизайна. Вы можете изменить общую тему для терминала и для командной строки отдельно. В окне командной строки вы увидите кнопку настроек в правом верхнем углу, которая показывает множество опций.
+
+![Терминал с меню выбора темы, показывающим опции: Default, Default Dark, One Dark Pro, Dracula, Monokai, Campbell, Warm Yellow, Rose Pine.](https://academy.hackthebox.com/storage/modules/87/term5.png)
+
+Wave Terminal предоставляет рабочие пространства, которые содержат желаемую коллекцию окон и виджетов. Когда вы щелкаете правой кнопкой мыши на вкладке рабочего пространства, вы также можете настроить для него тему.
+
+![Терминал с меню выбора фона, показывающим опции: Default, Blue, Green, Red, Rainbow, Ocean Depths, Aqua Horizon, Sunset, Enchanted Forest, Twilight Mist.](https://academy.hackthebox.com/storage/modules/87/term6.png)
+
+Наличие браузера в терминале может показаться излишним для большинства людей, поскольку это негативно влияет на производительность терминала. Однако, иметь всё на одном экране — один из ключевых аспектов продуктивности и эффективности. Особенно, учитывая, что Wave Terminal использует тайловое управление окнами для эффективного размещения окон без их перекрытия.
+
+Многие люди любят иметь 2, 3 или даже 4 монитора и ноутбук на своем столе, что может выглядеть здорово, но поворачивать голову на 360 градусов в поисках нужной информации — всё, кроме эффективности.
+
+Эффективность происходит от простоты. Самый эффективный и простой способ решить задачу (теоретически) — использовать один клик. Когда мы смотрим фильмы о "хакерах", проникающих в сеть за несколько секунд, нас впечатляет не только их знания, но еще больше их эффективность и скорость.
+
+Поэтому, когда мы хотим быть эффективными и продуктивными, нам нужно сохранять простоту. Простая точка ориентации для измерения вашей продуктивности и эффективности:
+
+* `Если вам нужно больше 1 экрана для комфортной работы, вы недостаточно оптимизировали свою настройку/окружение.`
+
+Теперь давайте посмотрим на встроенный браузер и загрузим пользовательское фоновое изображение.
+
+![Wave Terminal с меню фона и поиском Google по запросу 'hackthebox background', показывающим результаты изображений.](https://academy.hackthebox.com/storage/modules/87/term7.png)
+
+После загрузки мы можем использовать встроенную команду `wsh` для управления Wave Terminal. Важно помнить, что команда `wsh` доступна только через Wave Terminal.
+
+Теперь давайте изменим фон Wave Terminal с помощью изображения, которое мы загрузили, используя следующую команду:
+
+```shell-session
+cry0l1t3@ubuntu:~$ wsh setbg ~/Downloads/krgw3Cr1X7OIXLzBSB3uTh1FtKIk8hyo.jpg 
+
+background set
+```
+
+После выполнения мы должны увидеть изменение фона, которое будет выглядеть примерно так:
+
+![Терминал с командой установки фона и страницей настройки Wave, показывающей темы вкладок.](https://academy.hackthebox.com/storage/modules/87/term8.png)
+
+#### Рабочие пространства
+
+Как уже упоминалось, Wave Terminal позволяет создавать несколько рабочих пространств, которые могут служить для конкретных потребностей и окружений. Например, у нас может быть одно рабочее пространство для работы, другое для личного проекта и третье для частных нужд.
+
+![Wave Terminal с переключателем рабочих пространств, показывающим опции: Hack The Box, Another Workspace, Create new workspace.](https://academy.hackthebox.com/storage/modules/87/term9.png)
+
+#### Изменение размера блоков
+
+Кроме того, встроенный тайловый оконный менеджер позволяет изменять размер окон либо с помощью клавиатуры, либо с помощью мыши.
+
+![Терминал с каталогом файлов и отображенным графиком CPU.](https://academy.hackthebox.com/storage/modules/87/term10.png)
+
+Кроме того, мы также можем реорганизовать окна, перемещая их в нужное положение. Например, мы можем переместить монитор производительности над файловым менеджером.
+
+![Терминал с наложением каталога файлов и графика CPU.](https://academy.hackthebox.com/storage/modules/87/term11.png)
+
+Это приведет к новой компоновке окон, которая будет выглядеть примерно так:
+
+![Терминал с отображенным графиком CPU и каталогом файлов.](https://academy.hackthebox.com/storage/modules/87/term12.png)
+
+С помощью сочетания клавиш `CTRL + M` мы можем "увеличить"/максимизировать выбранное окно почти до полного размера. Это отличная функция, которая помогает нам сосредоточиться на одном окне, не отвлекаясь на другие.
+
+![График использования CPU с осями времени и процентов.](https://academy.hackthebox.com/storage/modules/87/term13.png)
+
+Теперь давайте рассмотрим некоторые команды, которые предоставляет `wsh`.
+
+```shell-session
+cry0l1t3@ubuntu:~$ wsh help
+wsh is a small utility that lets you do cool things with Wave Terminal, right from the command line
+
+Usage:
+  wsh [command]
+
+Available Commands:
+  ai          Send a message to an AI block
+  completion  Generate the autocompletion script for the specified shell
+  conn        manage Wave Terminal connections
+  deleteblock delete a block
+  edit        edit a file
+  editconfig  edit Wave configuration files
+  editor      edit a file (blocks until editor is closed)
+  file        manage files across different storage systems
+  getmeta     get metadata for an entity
+  getvar      get variable(s) from a block
+  help        Help about any command
+  launch      launch a widget by its ID
+  notify      create a notification
+  readfile    read a blockfile
+  run         run a command in a new block
+  setbg       set background image or color for a tab
+  setconfig   set config
+  setmeta     set metadata for an entity
+  setvar      set variable(s) for a block
+  ssh         connect this terminal to a remote host
+  term        open a terminal in directory
+  version     Print the version number of wsh
+  view        preview/edit a file or directory
+  wavepath    Get paths to various waveterm files and directories
+  web         web commands
+  workspace   Manage workspaces
+  wsl         connect this terminal to a local wsl connection
+
+Flags:
+  -b, --block string   for commands which require a block id
+  -h, --help           help for wsh
+```
+
+С помощью команды `wsh view .` мы можем открыть файловый менеджер для указанного каталога (`.` - текущий каталог). Это открывает новое окно рядом с командной строкой со всей необходимой информацией, для которой обычно мы бы использовали команду `ls`.
+
+![Терминал с командой 'wsh view' и списком файлов каталога.](https://academy.hackthebox.com/storage/modules/87/term14.png)
+
+Теперь мы можем выбрать файл `.bashrc` в файловом менеджере, и он откроется во встроенном текстовом редакторе, который позволяет нам сразу модифицировать файл.
+
+![Терминал с командой 'wsh view' и отображенным содержимым файла .bashrc.](https://academy.hackthebox.com/storage/modules/87/term15.png)
+
+Опять же, максимизация/увеличение окна делает работу легче и удобнее.
+
+![Терминал, отображающий содержимое файла .bashrc с комментариями и настройками.](https://academy.hackthebox.com/storage/modules/87/term16.png)
+
+Далее, давайте взглянем на [документацию по конфигурации](https://docs.waveterm.dev/config). Используя `wsh editconfig`, мы можем редактировать файл конфигурации без необходимости его искать. На странице документации мы увидим множество различных ключей, которые можно установить, например, `web:defaulturl` для встроенного браузера. Давайте установим его на https://academy.hackthebox.com.
+
+![Терминал с командой 'wsh editconfig' и файлом settings.json, показывающим настройки autoupdate, telemetry и web URL.](https://academy.hackthebox.com/storage/modules/87/term17.png)
+
+После сохранения нажмем на виджет `Web` на правой боковой панели и проверим, открывается ли правильная страница.
+
+![Терминал с командой 'wsh editconfig', файлом settings.json, показывающим конфигурацию, и веб-страницей HTB Academy.](https://academy.hackthebox.com/storage/modules/87/term18.png)
+
+Давайте адаптируем всю тему терминала к стилю Hack The Box.
+
+![Терминал с командой 'wsh editconfig termthemes.json' и конфигурацией темы JSON для Hack The Box.](https://academy.hackthebox.com/storage/modules/87/term19.png)
+
+```bash
+{
+  "hackthebox": {
+    "display:name": "Hack The Box",
+    "display:order": 1,
+    "black": "#000000",
+    "red": "#ff3e3e",
+    "green": "#9fef00",
+    "yellow": "#ffaf00",
+    "blue": "#004cff",
+    "magenta": "#9f00ff",
+    "cyan": "#2ee7b6",
+    "white": "#ffffff",
+    "brightBlack": "#666666",
+    "brightRed": "#ff8484",
+    "brightGreen": "#c5f467",
+    "brightYellow": "#ffcc5c",
+    "brightBlue": "#5cb2ff",
+    "brightMagenta": "#c16cfa",
+    "brightCyan": "#5cecc6",
+    "brightWhite": "#ffffff",
+    "gray": "#a4b1cd",
+    "cmdtext": "#a4b1cd",
+    "foreground": "#a4b1cd",
+    "selectionBackground": "#313f55",
+    "background": "#1a2332",
+    "cursorAccent": "#313f55"
+  }
+}
+```
+
+Теперь давайте загрузим еще один [обои HTB](https://github.com/ParrotSec/parrot-wallpapers/blob/master/backgrounds/hackthebox.jpg) и установим его в качестве нового фона для терминала.
+
+```shell-session
+cry0l1t3@ubuntu:~$ wsh setbg ~/Downloads/hackthebox.jpg 
+
+background set
+```
+
+После сохранения всех настроек, терминал должен выглядеть следующим образом:
+
+![Терминал с командой 'wsh setbg ~/Downloads/hackthebox.jpg' и сообщением об установке фона.](https://academy.hackthebox.com/storage/modules/87/term20.png)
+
