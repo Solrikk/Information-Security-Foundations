@@ -1694,3 +1694,144 @@ background set
 
 ![Терминал с командой 'wsh setbg ~/Downloads/hackthebox.jpg' и сообщением об установке фона.](https://academy.hackthebox.com/storage/modules/87/term20.png)
 
+
+
+
+
+# Оболочка
+
+---
+
+Оболочка - это основная среда, с которой мы работаем на нашей VM для тестирования на проникновение. Поэтому нам необходимо убедиться, что эта среда соответствует всем нашим потребностям и настроена именно так, как мы хотим. Еще лучше, мы можем использовать скрипт конфигурации для настройки ее на других машинах таким же образом. Таким образом, для запуска новой виртуальной машины потребуется всего несколько команд, чтобы настроить оболочку так, как нам нужно, и наша работа, продуктивность и эффективность не пострадают.
+
+Одна из самых настраиваемых и богатых функциями оболочек - это `Z Shell (ZSH)`.
+
+---
+
+## ZSH
+
+Zsh включает множество функций и расширений, которые можно использовать. К ним относятся расширенное автодополнение при нажатии клавиши tab, подсветка синтаксиса, автопредложения и несколько других. Однако некоторые из этих функций требуют начальной настройки, хотя процесс установки и интеграции относительно прост. Для начала давайте получим доступ к нашему Ubuntu VPS и установим Zsh.
+
+```bash
+cry0l1t3@ubuntu:~$ sudo apt install zsh -y
+cry0l1t3@ubuntu:~$ zsh
+```
+
+После первого запуска `Zsh` появится страница конфигурации. В этом случае вы можете ввести `q`, чтобы выйти без внесения изменений, так как конфигурация будет выполнена вручную.
+
+```
+This is the Z Shell configuration function for new users,
+zsh-newuser-install.
+You are seeing this message because you have no zsh startup files
+(the files .zshenv, .zprofile, .zshrc, .zlogin in the directory
+~).  This function can help you with a few settings that should
+make your use of the shell easier.
+
+You can:
+
+(q)  Quit and do nothing.  The function will be run again next time.
+
+(0)  Exit, creating the file ~/.zshrc containing just a comment.
+     That will prevent this function being run again.
+
+(1)  Continue to the main menu.
+
+(2)  Populate your ~/.zshrc with the configuration recommended
+     by the system administrator and exit (you will need to edit
+     the file by hand, if so desired).
+
+--- Type one of the keys in parentheses --- 
+```
+
+Теперь вы должны увидеть приглашение оболочки следующего вида:
+
+```
+ubuntu%
+```
+
+Одно из наиболее используемых расширений (фреймворк) называется [ohmyzsh](https://github.com/ohmyzsh/ohmyzsh/wiki). OhMyZsh - это фреймворк, который управляет и расширяет конфигурацию и функциональность zsh. Он упрощает процесс настройки Zsh еще больше, предоставляя коллекцию плагинов, тем и инструментов.
+
+Установка `OhMyZsh` также проста и требует всего одной команды.
+
+#### Oh-my-zsh
+
+```bash
+ubuntu% sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
+
+Cloning Oh My Zsh...
+remote: Enumerating objects: 1439, done.
+remote: Counting objects: 100% (1439/1439), done.
+remote: Compressing objects: 100% (1374/1374), done.
+remote: Total 1439 (delta 42), reused 1250 (delta 37), pack-reused 0 (from 0)
+Receiving objects: 100% (1439/1439), 3.28 MiB | 20.34 MiB/s, done.
+Resolving deltas: 100% (42/42), done.
+From https://github.com/ohmyzsh/ohmyzsh
+ * [new branch]      master     -> origin/master
+branch 'master' set up to track 'origin/master'.
+Already on 'master'
+/home/cry0l1t3
+
+Looking for an existing zsh config...
+Found /home/cry0l1t3/.zshrc. Backing up to /home/cry0l1t3/.zshrc.pre-oh-my-zsh
+Using the Oh My Zsh template file and adding it to /home/cry0l1t3/.zshrc.
+
+
+Time to change your default shell to zsh:
+Do you want to change your default shell to zsh? [Y/n] y
+
+Changing your shell to /usr/bin/zsh...
+[sudo] password for cry0l1t3: ********************
+
+Shell successfully changed to '/usr/bin/zsh'.
+
+         __                                     __   
+  ____  / /_     ____ ___  __  __   ____  _____/ /_  
+ / __ \/ __ \   / __ `__ \/ / / /  /_  / / ___/ __ \ 
+/ /_/ / / / /  / / / / / / /_/ /    / /_(__  ) / / / 
+\____/_/ /_/  /_/ /_/ /_/\__, /    /___/____/_/ /_/  
+                        /____/                       ....is now installed!
+
+Before you scream Oh My Zsh! look over the `.zshrc` file to select plugins, themes, and options.
+
+• Follow us on X: https://x.com/ohmyzsh
+• Join our Discord community: https://discord.gg/ohmyzsh
+• Get stickers, t-shirts, coffee mugs and more: https://shop.planetargon.com/collections/oh-my-zsh
+
+
+➜  ~ 
+```
+
+После установки вы увидите новое приглашение оболочки со стрелкой.
+
+Далее, давайте загрузим плагины `autosuggestions` и `syntax-highlighting` и установим их. Эти плагины мы поместим в каталог `~/.oh-my-zsh/custom`, где хранятся пользовательские плагины.
+
+Эти плагины будут размещены в каталоге `~/.oh-my-zsh/custom`, где хранятся пользовательские плагины.
+
+```bash
+➜  ~ git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions
+➜  ~ git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting
+```
+
+После того, как мы загрузили плагины, нам нужно настроить Zsh для их использования. Мы можем сделать это, отредактировав файл `~/.zshrc` и найдя раздел `plugins`. Внутри `plugins` мы "активируем" установленные плагины, поместив имена плагинов в квадратные скобки.
+
+![Файл конфигурации Zsh, показывающий настройку плагинов и пользовательские настройки.](https://academy.hackthebox.com/storage/modules/87/sh1.png)
+
+Полный список доступных плагинов для Zsh вы можете найти [здесь](https://github.com/ohmyzsh/ohmyzsh/wiki/plugins-overview). Настоятельно рекомендуется просмотреть этот список и выбрать все необходимые вам плагины.
+
+Еще одно очень полезное дополнение к Zsh - тема Powerlevel10k, которая делает оболочку красивой и удобной для глаз. Это одна из самых популярных тем для Zsh, известная своей скоростью, гибкостью и визуально привлекательными приглашениями, отображающими контекстную информацию, такую как статус Git, пути к каталогам и системные детали.
+
+Для установки можно использовать следующие команды:
+
+#### Powerlevel10k
+
+```bash
+➜  ~ git clone --depth=1 https://github.com/romkatv/powerlevel10k.git ~/powerlevel10k
+➜  ~ echo 'source ~/powerlevel10k/powerlevel10k.zsh-theme' >>~/.zshrc
+➜  ~ exec zsh
+```
+
+Вам будет предложена страница конфигурации для powerlevel10k, которая задаст серию вопросов для создания желаемой темы. Не стесняйтесь оформить ее так, как вы хотите, и помните, что вы всегда можете настроить ее снова. После прохождения этого процесса вы увидите оболочку, подобную этой:
+
+![Терминал с фоном Hack The Box и приглашением командной строки.](https://academy.hackthebox.com/storage/modules/87/sh2.png)
+
+Мы настоятельно рекомендуем изучить документацию Powerlevel10k, чтобы узнать о различных плагинах и определить, какие из них подходят именно вам. Если вы установите слишком много плагинов, это может значительно замедлить работу оболочки, что, опять же, снижает скорость и эффективность вашей работы.
