@@ -177,6 +177,7 @@ LAN (Local Area Network, Локальная сеть) и WLAN (Wireless Local Ar
 
 
 
+
 # Сетевые топологии
 
 ---
@@ -236,7 +237,7 @@ LAN (Local Area Network, Локальная сеть) и WLAN (Wireless Local Ar
 
 #### Топология "Точка-точка"
 
-![image](Introduction%20to%20Networking_files/topo_p2p.webp)
+![Диаграмма, показывающая соединение между двумя хостами](https://academy.hackthebox.com/storage/modules/34/topo_p2p.png)
 
 ---
 
@@ -248,7 +249,7 @@ LAN (Local Area Network, Локальная сеть) и WLAN (Wireless Local Ar
 
 #### Шинная топология
 
-![Диаграмма, показывающая соединение между хостом A и хостом B](Introduction%20to%20Networking_files/topo_bus.webp)
+![Диаграмма, показывающая соединение между хостом A и хостом B](https://academy.hackthebox.com/storage/modules/34/topo_bus.png)
 
 ---
 
@@ -259,7 +260,7 @@ LAN (Local Area Network, Локальная сеть) и WLAN (Wireless Local Ar
 
 #### Звездная топология
 
-![Диаграмма, показывающая соединения между хостами A, B, C, D, E и F](Introduction%20to%20Networking_files/topo_star.webp)
+![Диаграмма, показывающая соединения между хостами A, B, C, D, E и F](https://academy.hackthebox.com/storage/modules/34/topo_star.png)
 
 ---
 
@@ -278,7 +279,7 @@ LAN (Local Area Network, Локальная сеть) и WLAN (Wireless Local Ar
 
 #### Кольцевая топология
 
-![Диаграмма, показывающая маршрутизатор, соединяющий хосты A, B, C и D](Introduction%20to%20Networking_files/topo_ring.webp)
+![Диаграмма, показывающая маршрутизатор, соединяющий хосты A, B, C и D](https://academy.hackthebox.com/storage/modules/34/topo_ring.png)
 
 ---
 
@@ -296,7 +297,7 @@ LAN (Local Area Network, Локальная сеть) и WLAN (Wireless Local Ar
 
 #### Ячеистая топология
 
-![Сетевая диаграмма, показывающая хосты A, B, C и D, подключенные через маршрутизаторы A, B, C и D](Introduction%20to%20Networking_files/topo_mesh.webp)
+![Сетевая диаграмма, показывающая хосты A, B, C и D, подключенные через маршрутизаторы A, B, C и D](https://academy.hackthebox.com/storage/modules/34/topo_mesh.png)
 
 ---
 
@@ -308,7 +309,7 @@ LAN (Local Area Network, Локальная сеть) и WLAN (Wireless Local Ar
 
 #### Древовидная топология
 
-![Сетевая диаграмма, показывающая сервер, подключенный к двум коммутаторам Ethernet, каждый из которых связан с хостами A, B, C, D, E и F](Introduction%20to%20Networking_files/topo_tree.webp)
+![Сетевая диаграмма, показывающая сервер, подключенный к двум коммутаторам Ethernet, каждый из которых связан с хостами A, B, C, D, E и F](https://academy.hackthebox.com/storage/modules/34/topo_tree.png)
 
 ---
 
@@ -318,7 +319,7 @@ LAN (Local Area Network, Локальная сеть) и WLAN (Wireless Local Ar
 
 #### Гибридная топология
 
-![Сетевая диаграмма, показывающая хосты A, B, C, D, E и F, подключенные через маршрутизаторы A, B и C](Introduction%20to%20Networking_files/topo_hybrid.webp)
+![Сетевая диаграмма, показывающая хосты A, B, C, D, E и F, подключенные через маршрутизаторы A, B и C](https://academy.hackthebox.com/storage/modules/34/topo_hybrid.png)
 
 ---
 
@@ -332,6 +333,4 @@ LAN (Local Area Network, Локальная сеть) и WLAN (Wireless Local Ar
 
 #### Топология последовательной цепи
 
-![Сетевая диаграмма, показывающая хосты A, B, D и E, подключенные к хосту C](Introduction%20to%20Networking_files/topo_daisy-chain.webp)
-
-
+![Сетевая диаграмма, показывающая хосты A, B, D и E, подключенные к хосту C](https://academy.hackthebox.com/storage/modules/34/topo_daisy-chain.png)
