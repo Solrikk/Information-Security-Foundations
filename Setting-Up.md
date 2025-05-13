@@ -2361,3 +2361,166 @@ cry0l1t3@ubuntu:~$ vimtutor
 Еще раз, мы рекомендуем прочитать документацию, чтобы ознакомиться с использованием vim, так как Neovim/Vim позволит вам писать и редактировать код или файлы `очень быстро`, когда вы станете профессионалом. Кроме того, NvChad предоставляет выбор темы, который мы можем открыть с помощью клавиши `Space + t + h`. Здесь мы найдем множество предустановленных тем и сможем выбрать ту, которая соответствует нашим вкусам.
 
 ![Интерфейс Tmux, отображающий меню выбора цветовой схемы с различными темами, такими как 'jabuti' и 'material-deep-ocean'](https://academy.hackthebox.com/storage/modules/87/code7.png)
+
+
+
+
+
+
+# Продуктивные утилиты
+
+---
+
+В этом разделе мы рассмотрим еще несколько инструментов для повышения вашей продуктивности и эффективности. В частности, мы сосредоточимся на инструментах, которые помогают в:
+
+* поиске конкретной информации, файлов или каталогов
+* просмотре содержимого каталогов
+* выводе содержимого файлов более эффективным способом
+* быстром взгляде на производительность нашей системы
+
+---
+
+# FZF
+
+Сначала начнем с [FZF](https://github.com/junegunn/fzf). FZF — это терминальный инструмент нечеткого поиска, разработанный для интерактивной фильтрации и поиска в списках с нечетким сопоставлением. Он позволяет искать строки для сопоставления элементов, разбросанных по другой строке, с мгновенной обратной связью. Кроме того, он позволяет интегрировать другие инструменты, такие как `batcat` или `eza` (о которых мы поговорим позже в этом разделе), чтобы видеть содержимое наших совпадений без необходимости выходить из окна FZF.
+
+По сути, он заменяет команду find, которая часто выдает много данных, которые нам приходится просматривать, не имея возможности отфильтровать определенные строки. Для установки FZF мы можем использовать следующие команды:
+
+```bash
+cry0l1t3@ubuntu:~$ git clone --depth 1 https://github.com/junegunn/fzf.git ~/.fzf
+
+Cloning into '/home/cry0l1t3/.fzf'...
+remote: Enumerating objects: 145, done.
+remote: Counting objects: 100% (145/145), done.
+remote: Compressing objects: 100% (136/136), done.
+remote: Total 145 (delta 5), reused 58 (delta 2), pack-reused 0 (from 0)
+Receiving objects: 100% (145/145), 347.52 KiB | 1.96 MiB/s, done.
+Resolving deltas: 100% (5/5), done.
+Downloading bin/fzf ...
+  % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0
+100 1571k  100 1571k    0     0  1728k      0 --:--:-- --:--:-- --:--:-- 9685k
+  - Checking fzf executable ... 0.61.3
+
+
+cry0l1t3@ubuntu:~$ ~/.fzf/install
+
+Do you want to enable fuzzy auto-completion? ([y]/n) y
+Do you want to enable key bindings? ([y]/n) y
+
+Generate /home/cry0l1t3/.fzf.bash ... OK
+Generate /home/cry0l1t3/.fzf.zsh ... OK
+
+Do you want to update your shell configuration files? ([y]/n) y
+
+Update /home/cry0l1t3/.bashrc:
+  - [ -f ~/.fzf.bash ] && source ~/.fzf.bash
+    + Added
+
+Update /home/cry0l1t3/.zshrc:
+  - [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+    + Added
+
+Finished. Restart your shell or reload config file.
+   source ~/.bashrc  # bash
+   source ~/.zshrc   # zsh
+
+Use uninstall script to remove fzf.
+
+For more information, see: https://github.com/junegunn/fzf
+```
+
+После установки мы можем отредактировать файл `.zshrc` и назначить псевдоним для команды `fzf`.
+
+```bash
+cry0l1t3@ubuntu:~$ vim .zshrc
+```
+
+```bash
+<SNIP>
+
+# Aliases
+alias ff="fzf --style full --preview 'fzf-preview.sh {}' --bind 'focus:transform-header:file --brief {}'"
+
+<SNIP>
+```
+
+Теперь нам нужно перезагрузить файл `.zshrc` для Zsh.
+
+```bash
+cry0l1t3@ubuntu:~$ source ~/.zshrc
+```
+
+После этого, если вы наберете `ff`, он откроет интерактивный интерфейс, где вы сможете увидеть содержимое текущего каталога с содержимым файла `mycode.py`.
+
+![Интерфейс Tmux с разделенным просмотром, показывающим скрипт Python для извлечения уникальных значений словаря справа и список файлов слева](https://academy.hackthebox.com/storage/modules/87/prod1.png)
+
+---
+
+## EZA
+
+Eza — это современная альтернатива команде `ls`. Она предоставляет цветные, детальные списки файлов со статусом Git, иконками и дополнительными функциями, такими как гиперссылки. Кроме того, она различает типы файлов с помощью цветов и опциональных иконок, если вы используете [Nerd Font](https://www.nerdfonts.com/). Мы даже можем редактировать тему и цвета, которые использует Eza.
+
+Поскольку `ls` — одна из самых распространенных команд, которые мы используем в системах Linux, наличие лучшего и более эффективного инструмента значительно облегчает нам жизнь в долгосрочной перспективе. Для его установки мы можем выполнить следующие команды:
+
+```bash
+cry0l1t3@ubuntu:~$ sudo apt install eza -y
+cry0l1t3@ubuntu:~$ vim ~/.zshrc
+```
+
+Теперь мы можем назначить различные псевдонимы для команды `eza`, чтобы получать различные представления списков.
+
+```bash
+<SNIP>
+
+# Aliases
+alias ff="fzf --style full --preview 'fzf-preview.sh {}' --bind 'focus:transform-header:file --brief {}'"
+alias ls='eza $eza_params'
+alias l='eza --git-ignore $eza_params'
+alias ll='eza --all --header --long $eza_params'
+alias llm='eza --all --header --long --sort=modified $eza_params'
+alias la='eza -lbhHigUmuSa'
+alias lx='eza -lbhHigUmuSa@'
+alias lt='eza --tree $eza_params'
+alias tree='eza --tree $eza_params'
+
+<SNIP>
+```
+
+Снова, после редактирования файла `.zshrc` нам нужно его перезагрузить.
+
+```bash
+cry0l1t3@ubuntu:~$ source ~/.zshrc
+```
+
+Теперь мы можем протестировать различные команды и проверить результаты.
+
+![Интерфейс Tmux, показывающий листинги каталогов с разрешениями файлов, размерами и датами изменения для плагинов '.oh-my-zsh'](https://academy.hackthebox.com/storage/modules/87/prod2.png)
+
+---
+
+## Bat
+
+[Bat](https://github.com/sharkdp/bat) — это cat с крыльями. Он обеспечивает подсветку синтаксиса для большого количества языков и поставляется со встроенной интеграцией с git, что позволяет нам видеть изменения в файлах.
+
+```bash
+cry0l1t3@ubuntu:~$ sudo apt install bat
+```
+
+Здесь вы можете увидеть разницу между стандартным инструментом `cat` и `batcat`. Не стесняйтесь добавить псевдоним для `cat`, который заменяется на `batcat` с необходимыми опциями, которые вы можете найти в их репозитории.
+
+![Интерфейс Tmux с разделенным просмотром, показывающий Python-скрипт для извлечения уникальных значений словаря в двух панелях](https://academy.hackthebox.com/storage/modules/87/prod3.png)
+
+---
+
+## Btop
+
+Btop — это инструмент мониторинга системы для терминала, который заменяет инструменты `htop` и `top`. Он также красочный и может быть настроен в зависимости от ваших потребностей и предпочтений. Он может отслеживать CPU, память, диск, сеть и процессы, что делает его отличным инструментом для отладки проблем с производительностью. Вы можете установить инструмент с помощью следующей команды:
+
+```bash
+cry0l1t3@ubuntu:~$ sudo apt install btop -y
+```
+
+![Интерфейс Tmux, отображающий системный мониторинг с процессором, памятью, использованием диска, сетевой активностью и списком процессов](https://academy.hackthebox.com/storage/modules/87/prod4.png)
+
