@@ -1835,3 +1835,422 @@ Before you scream Oh My Zsh! look over the `.zshrc` file to select plugins, them
 ![Терминал с фоном Hack The Box и приглашением командной строки.](https://academy.hackthebox.com/storage/modules/87/sh2.png)
 
 Мы настоятельно рекомендуем изучить документацию Powerlevel10k, чтобы узнать о различных плагинах и определить, какие из них подходят именно вам. Если вы установите слишком много плагинов, это может значительно замедлить работу оболочки, что, опять же, снижает скорость и эффективность вашей работы.
+
+
+
+
+
+# Мультиплексор
+
+---
+
+Мультиплексор терминала — это инструмент, который позволяет управлять несколькими сессиями терминала в одном окне или сеансе. Мы можем создавать, переключаться и организовывать несколько экземпляров терминала одновременно, повышая нашу продуктивность в командной строке. Мультиплексор позволяет разделить терминал на несколько окон, создавать панели (вкладки) и быстро перемещаться между ними с помощью простых сочетаний клавиш.
+
+Например, мы можем открыть SSH-соединение в одном окне командной строки, разделить его вертикально и открыть страницу руководства в другом. Кроме того, мы можем создать третье окно для написания скрипта, автоматизирующего текущий процесс. По сути, такая настройка позволяет нам поддерживать сеанс SSH, читать руководство при настройке службы и делать заметки — все в одном терминале.
+
+---
+
+## Wave Terminal
+
+Как мы видели с Wave Terminal, возможность организовать все на одном экране позволяет работать в разных средах одновременно без необходимости использования нескольких мониторов. Кроме того, функция, позволяющая выбрать одно из окон и сосредоточиться на нем, повышает концентрацию для нашей работы без отвлечения на другие окна.
+
+![HTB Academy веб-страница с «Ваше путешествие в кибербезопасность начинается здесь» и терминал, запускающий команду cowsay](https://academy.hackthebox.com/storage/modules/87/multi1.png)
+
+---
+
+## Ghostty
+
+Ghostty — один из самых быстрых эмуляторов терминала. Помимо скорости, он легко настраивается и включает встроенный мультиплексор. Давайте установим его на наш VPS и протестируем. Самый простой способ установить Ghostty в системе Ubuntu — использовать менеджер пакетов Snap:
+
+```bash
+cry0l1t3@ubuntu:~$ snap install ghostty --classic
+
+ghostty v1.1.3 from Ken VanDine✪ installed
+```
+
+После установки мы можем запустить Ghostty и увидеть терминал, который выглядит примерно так:
+
+![Терминал с командной строкой на темном фоне](https://academy.hackthebox.com/storage/modules/87/multi2.png)
+
+В домашнем каталоге есть скрытый подкаталог с именем `~/.config`. Внутри него папка `ghostty` содержит конфигурационный файл, который можно редактировать для настройки Ghostty. Более подробную информацию можно найти в [документации Ghostty](https://ghostty.org/docs/config).
+
+![Конфигурационный файл в терминале, показывающий настройки цвета и привязки клавиш для новой среды, перемещения, переключения и перезагрузки конфигурации](https://academy.hackthebox.com/storage/modules/87/multi3.png)
+
+Эта конфигурация позволяет нам использовать простые сочетания клавиш для навигации и управления окнами и панелями в терминале Ghostty.
+
+![Терминал, показывающий список каталогов, настройки конфигурации для цветов и привязки клавиш, а также системный монитор с использованием ЦП и памяти](https://academy.hackthebox.com/storage/modules/87/multi4.png)
+
+Вы можете использовать конфигурацию Ghostty от Zerebos для создания своей конфигурации Ghostty с помощью веб-приложения [здесь](https://ghostty.zerebos.com/).
+
+Мы также можем настроить предпочтительную тему для Ghostty. Перейдите в `~/.config/ghostty` и создайте новый каталог с именем `themes` для хранения нужных тем. Например, чтобы создать тему `HackTheBox`, выполните следующие шаги:
+
+```bash
+cry0l1t3@ubuntu:~$ cd .config/ghostty
+cry0l1t3@ubuntu:~/.config/ghostty$ mkdir themes
+cry0l1t3@ubuntu:~/.config/ghostty$ vim HackTheBox
+```
+
+Добавьте в файл следующую цветовую палитру и сохраните ее. Это указывает терминалу Ghostty, какие цвета использовать для каждого компонента.
+
+```bash
+palette = 0=#41444d
+palette = 1=#fc2f52
+palette = 2=#25a45c
+palette = 3=#ff936a
+palette = 4=#3476ff
+palette = 5=#7a82da
+palette = 6=#4483aa
+palette = 7=#cdd4e0
+palette = 8=#8f9aae
+palette = 9=#ff6480
+palette = 10=#3fc56b
+palette = 11=#f9c859
+palette = 12=#10b1fe
+palette = 13=#ff78f8
+palette = 14=#5fb9bc
+palette = 15=#ffffff
+background = #282c34
+foreground = #b9c0cb
+cursor-color = #ffcc00
+cursor-text = #282c34
+selection-background = #b9c0ca
+selection-foreground = #272b33
+```
+
+После сохранения файла выполните следующую команду для просмотра доступных тем. Вновь созданная тема `HackTheBox` теперь появится с вашей пользовательской цветовой палитрой.
+
+```bash
+cry0l1t3@ubuntu:~/.config/ghostty/themes$ ghostty +list-themes
+```
+
+![Меню выбора темы с предварительным просмотром темы HackTheBox, цветовой палитрой и фрагментом кода](https://academy.hackthebox.com/storage/modules/87/multi5.png)
+
+Наличие чистого, хорошо сконструированного эмулятора терминала в нашем рабочем пространстве повышает удовлетворение и радость во время рабочего процесса. Если мы погружены в среду, которая нам приятна и одновременно интересна, это повысит нашу эффективность и продуктивность как побочный эффект.
+
+Однако есть проблема, которую мы еще не решили. Ограничение Ghostty в том, что он не поддерживает повторное присоединение сеансов через SSH. Поскольку мультиплексирование локально для экземпляра, удаленные пользователи должны заново создавать свои сеансы при повторном подключении.
+
+---
+
+## Tmux
+
+В отличие от этого, Terminal Multiplexer (Tmux) — это мультиплексор терминала, который позволяет пользователям создавать, управлять, отсоединять и повторно подключать сеансы терминала даже через SSH-соединения. Tmux структурирован в три основных компонента:
+
+* Сессии
+* Окна (вкладки)
+* Панели
+
+Сессии представляют собой независимый экземпляр Tmux с собственным набором окон и панелей, который может работать в фоновом режиме. Эти сессии можно отсоединять/переподключать и делиться ими с другими для совместной работы. Окно — это один экран в сеансе, подобный вкладке в браузере, который содержит одну или несколько панелей. Панель — это подразделение окна, которое может работать бок о бок, где мы можем иметь несколько командных строк, открытых в одном окне.
+
+Давайте установим Tmux и протестируем его, используя следующие команды:
+
+```bash
+cry0l1t3@ubuntu:~$ sudo apt install tmux -y
+cry0l1t3@ubuntu:~$ tmux
+```
+
+После запуска Tmux вы увидите новую зеленую строку состояния внизу. На этой панели отображается имя сеанса, индекс и имя окна, заголовок панели, время и дата.
+
+![Терминал с фоном Hack The Box и командной строкой, показывающей информацию о сеансе и время внизу](https://academy.hackthebox.com/storage/modules/87/multi6.png)
+
+Кривая обучения использованию Tmux немного больше и требует больше времени. Однако, если вы действительно освоитесь с Tmux, это изменит ваш способ работы и значительно повысит вашу продуктивность. Наличие одинаковой конфигурации Tmux на всех серверах, с которыми вы работаете, создает для вас среду, которая ощущается одинаково, независимо от того, к какому серверу вы подключены. Поскольку вы всегда работаете в одной и той же среде, навигация, создание, модификация и управление улучшатся за короткий период времени. Кроме того, настройка нового сервера будет ощущаться так, как будто вы работали с ним долгое время.
+
+Вам больше не нужно будет переориентироваться с новой настройкой сервера. После настройки серверы будут ощущаться как каталоги, по которым вы просто перемещаетесь и управляете.
+
+Теперь давайте создадим конфигурационный файл Tmux, который мы можем хранить в нашем домашнем каталоге как `.tmux.conf` со следующими настройками:
+
+```bash
+# Config Management
+unbind r
+bind r source-file ~/.tmux.conf \; display "Config reloaded."
+
+# Control
+set -g prefix C-space
+set -g mouse on
+
+# History
+set-option -g history-limit 50000
+
+# Numbering
+set -g base-index 1
+setw -g pane-base-index 1
+
+# Panes
+bind x split-window -v
+bind y split-window -h
+
+bind-key h select-pane -L
+bind-key j select-pane -D
+bind-key k select-pane -U
+bind-key l select-pane -R
+```
+
+После сохранения конфигурационного файла перезагрузите сеанс Tmux, чтобы применить изменения:
+
+```bash
+cry0l1t3@ubuntu:~$ tmux source .tmux.conf
+```
+
+С настроенной конфигурацией мы теперь можем использовать определенные сочетания клавиш для разделения окон и создания панелей. Например, нажатие `Ctrl + Space` активирует префикс Tmux, после чего нажатие `x` разделит окно вертикально.
+
+Tmux поддерживает широкий спектр плагинов. Наиболее важным является Tmux Plugin Manager (TPM), который упрощает установку и управление плагинами. Мы можем клонировать репозиторий TPM из Github, используя:
+
+```bash
+cry0l1t3@ubuntu:~$ git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
+cry0l1t3@ubuntu:~$ vim .tmux.conf
+```
+
+В нижней части конфигурационного файла мы должны добавить следующие строки:
+
+```bash
+<SNIP>
+
+# List of plugins
+set -g @plugin 'tmux-plugins/tpm'
+set -g @plugin 'tmux-plugins/tmux-sensible'
+
+# Other examples:
+# set -g @plugin 'github_username/plugin_name'
+# set -g @plugin 'github_username/plugin_name#branch'
+# set -g @plugin 'git@github.com:user/plugin'
+# set -g @plugin 'git@bitbucket.com:user/plugin'
+
+# Initialize TMUX plugin manager (keep this line at the very bottom of tmux.conf)
+run '~/.tmux/plugins/tpm/tpm'
+```
+
+После сохранения изменений нам нужно нажать клавишу префикса (`CTRL + Space`) и указать Tmux установить плагины, нажав `SHIFT + i`.
+
+```bash
+CTRL + Space
+SHIFT + i
+```
+
+После установки Tmux попросит вас нажать `ESCAPE`, чтобы продолжить ваш сеанс.
+
+```
+Already installed "tpm"
+Installing "tmux-sensible"
+  "tmux-sensible" download success
+  
+TMUX environment reloaded.
+
+Done, press ESCAPE to continue.  
+```
+
+Когда мы посмотрим на структуру каталога плагинов Tmux, она будет выглядеть примерно так:
+
+```bash
+cry0l1t3@ubuntu:~$ tree -d .tmux
+
+.tmux
+└── plugins
+    ├── tmux-sensible
+    └── tpm
+        ├── bin
+        ├── bindings
+        ├── docs
+        ├── lib
+        │   └── tmux-test
+        ├── scripts
+        │   └── helpers
+        └── tests
+            └── helpers
+
+13 directories
+```
+
+---
+
+## Темы Tmux
+
+Темы Tmux настраивают визуальный интерфейс терминала, включая строку состояния, сообщения и границы панелей. Темы определяются в файле `.tmux.conf` и хорошо интегрируются с Zsh, Oh-My-Zsh и Powerlevel10k. Некоторые из наиболее популярных плагинов тем:
+
+```bash
+'wfxr/tmux-power'
+'jimeh/tmux-themepack'
+'dracula/tmux'
+'arcticicestudio/nord-tmux'
+'catppuccin/tmux'
+```
+
+Давайте расширим нашу конфигурацию Tmux с темой `catppuccin` и пользовательскими переменными цвета, воспроизведя показанный ниже файл `Tmux.conf`:
+
+#### Tmux.conf
+
+```bash
+# Config Management
+unbind r
+bind r source-file ~/.tmux.conf \; display "Config reloaded."
+
+# Control
+set -g prefix C-space
+set -g mouse on
+
+# History
+set-option -g history-limit 50000
+
+# Numbering & Naming
+set -g base-index 1
+setw -g pane-base-index 1
+set-option -g automatic-rename on
+set-option -g automatic-rename-format '#{b:pane_current_path}'
+
+# Windows
+unbind W
+bind-key W command-prompt -p "Window name:" "new-window -n '%%'" # New Window
+bind-key t command-prompt -p "New name:" "rename-window '%%'"   # Rename Window
+
+# Switch Windows
+bind-key 0 select-window -t 0
+bind-key 1 select-window -t 1
+bind-key 2 select-window -t 2
+bind-key 3 select-window -t 3
+bind-key 4 select-window -t 4
+bind-key 5 select-window -t 5
+bind-key 6 select-window -t 6
+bind-key 7 select-window -t 7
+bind-key 8 select-window -t 8
+bind-key 9 select-window -t 9
+
+# Panes
+bind-key P command-prompt -p "Rename pane:" "select-pane -T '%%'"
+
+bind x split-window -v
+bind y split-window -h
+
+bind-key h select-pane -L
+bind-key j select-pane -D
+bind-key k select-pane -U
+bind-key l select-pane -R
+
+# List of plugins
+set -g @plugin 'tmux-plugins/tpm'
+
+# Theme
+set -g @plugin 'catppuccin/tmux#v2.1.3'
+run ~/.config/tmux/plugins/catppuccin/tmux/catppuccin.tmux
+
+# Options to make tmux more pleasant
+set -g mouse on
+set -g default-terminal "tmux-256color"
+
+# Configure the catppuccin plugin
+set -g @catppuccin_flavor "mocha"
+set -g @catppuccin_window_status_style "rounded"
+
+#----------------------------- Custom Theme
+# Define color variables inspired by Catppuccin Mocha, mapped to HackTheBox colors
+set -g @rosewater "#ffffff"       # BrightWhite
+set -g @flamingo "#ff8484"        # BrightRed
+set -g @pink "#c16cfa"            # BrightPurple
+set -g @mauve "#9f00ff"           # Purple
+set -g @red "#ff3e3e"             # Red
+set -g @maroon "#ff8484"          # BrightRed
+set -g @peach "#ffcc5c"           # BrightYellow
+set -g @yellow "#ffaf00"          # Yellow
+set -g @green "#9fef00"           # Green
+set -g @teal "#2ee7b6"            # Cyan
+set -g @sky "#5cecc6"             # BrightCyan
+set -g @sapphire "#5cb2ff"        # BrightBlue
+set -g @blue "#004cff"            # Blue
+set -g @lavender "#ffffff" #"#c16cfa"        # BrightPurple
+set -g @text "#a4b1cd"            # Foreground
+set -g @subtext1 "#666666"        # BrightBlack
+set -g @subtext0 "#313f55"        # SelectionBackground
+set -g @overlay2 "#666666"        # BrightBlack
+set -g @overlay1 "#313f55"        # SelectionBackground
+set -g @overlay0 "#313f55"        # CursorColor
+set -g @surface2 "#666666"        # BrightBlack
+set -g @surface1 "#313f55"        # SelectionBackground
+set -g @surface0 "#313f55"        # CursorColor
+set -g @base "#1a2332"            # Background
+set -g @mantle "#000000"          # Black
+set -g @crust "#000000"           # Black
+set -g @thm_bg "#1a2332"
+
+# Plugins
+set -g @plugin 'tmux-plugins/tmux-online-status'
+set -g @plugin 'tmux-plugins/tmux-battery'
+
+# Configure Online
+set -g @online_icon "ok"
+set -g @offline_icon "nok"
+
+# Status bar position and transparency
+set -g status-position bottom
+set -g status-style "bg=#{@thm_bg},fg=#{@text}"  # Transparent background
+
+# Status left: Session name, pane command, and path
+set -g status-left-length 100
+set -g status-left ""
+set -ga status-left "#{?client_prefix,#{#[bg=#{@red},fg=#{@base},bold]  #S },#{#[bg=default,fg=#{@mauve}]  #S }}"
+set -ga status-left "#[bg=default,fg=#{@overlay0}] │ "
+set -ga status-left "#[bg=default,fg=#{@blue}]  #{pane_current_command} "
+set -ga status-left "#[bg=default,fg=#{@overlay0}] │ "
+set -ga status-left "#[bg=default,fg=#{@teal}]  #{=/-32/...:#{s|$USER|~|:#{b:pane_current_path}}} "
+set -ga status-left "#[bg=default,fg=#{@overlay0}]#{?window_zoomed_flag, │ ,}"
+set -ga status-left "#[bg=default,fg=#{@yellow}]#{?window_zoomed_flag,  zoom ,}"
+
+# Status right: Battery, online status, VPN status, date/time
+set -g status-right-length 100
+set -g status-right ""
+set -ga status-right "#{?#{e|>=:10,#{battery_percentage}},#{#[bg=#{@red},fg=#{@base}]},#{#[bg=default,fg=#{@peach}]}} #{battery_icon} #{battery_percentage} "
+set -ga status-right "#[bg=default,fg=#{@overlay0}] │ "
+set -ga status-right "#[bg=default]#{?#{==:#{online_status},ok},#[fg=#{@sapphire}] 󰖩 on ,#[fg=#{@red},bold] 󰖪 off }"
+set -ga status-right "#[bg=default,fg=#{@overlay0}] │ "
+set -ga status-right "#[bg=default,fg=#{@green}]  #(~/vpn_status.sh) "
+set -ga status-right "#[bg=default,fg=#{@overlay0}] │ "
+set -ga status-right "#[bg=default,fg=#{@sky}] 󰭦 %Y-%m-%d 󰅐 %H:%M "
+
+# Window status with rounded tabs and extra padding
+set -g window-status-format "#[fg=#{@overlay0}]#[fg=#{@text},bg=#{@overlay0}]  #I:#W  #[fg=#{@overlay0},bg=default]"
+set -g window-status-current-format "#[fg=#{@green}]#[fg=#{@base},bg=#{@green}]  #I:#W  #[fg=#{@green},bg=default]"
+set -g window-status-style "bg=default"
+set -g window-status-last-style "bg=default,fg=#{@green}"
+set -g window-status-activity-style "bg=#{@red},fg=#{@base}"
+set -g window-status-bell-style "bg=#{@red},fg=#{@base},bold"
+set -gF window-status-separator "  "  # Add space between window tabs
+
+# Pane borders
+setw -g pane-border-status off  # Hide pane border status
+setw -g pane-active-border-style "bg=default,fg=#{@green}"
+setw -g pane-border-style "bg=default,fg=#{@surface0}"
+setw -g pane-border-lines single
+
+# Automatic window renaming
+set -wg automatic-rename on
+set -g automatic-rename-format "Window"
+
+# Justify window status
+set -g status-justify "absolute-centre"
+
+# Simulate bottom padding by adding a blank line
+set -g status-format[1] ""
+
+# Bootstrap tpm
+if "test ! -d ~/.tmux/plugins/tpm" \
+   "run 'git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm && ~/.tmux/plugins/tpm/bin/install_plugins'"
+
+# Initialize TMUX plugin manager
+run '~/.tmux/plugins/tpm/tpm'
+```
+
+Теперь давайте сохраним его и инициируем установку плагинов.
+
+```bash
+Ctrl + Space
+Shift + i
+```
+
+После установки и перезагрузки мы увидим строку состояния, которая выглядит следующим образом:
+
+#### Wave Terminal
+
+![Терминал с тремя разделенными панелями, каждая из которых показывает командную строку, и подробностями сеанса внизу](https://academy.hackthebox.com/storage/modules/87/multi7.png)
+
+#### Ghostty
+
+![Скриншот сеанса tmux с четырьмя панелями, каждая из которых показывает командную строку. В правом верхнем углу есть индикатор ошибки, а остальные показывают статус успеха. На фоне изображен стилизованный логотип лисы](https://academy.hackthebox.com/storage/modules/87/multi8.png)
+
+Мы настоятельно рекомендуем вам ознакомиться с документацией [Tmux Getting Started](https://github.com/tmux/tmux/wiki/Getting-Started) и поработать с tmux. Помните, кривая обучения будет немного круче, но результат будет более чем стоить затраченных усилий и времени в конечном итоге.
+
