@@ -2254,3 +2254,110 @@ Shift + i
 
 Мы настоятельно рекомендуем вам ознакомиться с документацией [Tmux Getting Started](https://github.com/tmux/tmux/wiki/Getting-Started) и поработать с tmux. Помните, кривая обучения будет немного круче, но результат будет более чем стоить затраченных усилий и времени в конечном итоге.
 
+
+
+
+
+
+
+# Редактор кода
+
+---
+
+Мы часто сталкиваемся с ситуациями, когда нам необходимо изменить и/или написать собственный код. Разработка кода, например, на Python, включает написание, тестирование и отладку для решения проблем или автоматизации сложных задач. Это требует нашего полного внимания, так как требует от нас сосредоточенного, логического мышления при сохранении глубокого технического понимания. Нам, безусловно, будет сложно, если наша рабочая среда не настроена должным образом.
+
+У нас есть три различных варианта. Мы можем использовать графический редактор, или терминальный редактор, или оба. Поскольку мы в основном работаем в терминале, наличие функционально богатого терминального редактора кода более эффективно, чем любое другое решение. Однако графические редакторы более удобны для пользователя и требуют меньше времени для освоения. Улучшенная кривая обучения имеет свою цену в виде потребления большего количества ресурсов компьютера. Например, это может вызвать проблемы с памятью при запуске нескольких экземпляров на ПК с 16 ГБ оперативной памяти.
+
+Давайте взглянем на один из наиболее широко используемых (и ценимых) графических редакторов на рынке.
+
+---
+
+## VSCode
+
+[VSCode](https://code.visualstudio.com/) — это графическая интегрированная среда разработки (IDE), известная своей удобностью использования и обширным списком расширений. Она также предоставляет множество встроенных инструментов для отладки, Git и поддержки различных языков программирования. В то же время она высоко настраиваема и имеет встроенный терминал. Давайте загрузим VSCode и установим его.
+
+![Интерфейс Visual Studio Code, показывающий проводник с файлами проекта и редактор кода с CSS-кодом, а также панель чата](https://academy.hackthebox.com/storage/modules/87/code1.png)
+
+В нашем примере мы используем Ubuntu, и поэтому выбрали скачивание и установку пакета на основе Debian.
+
+```bash
+cry0l1t3@ubuntu:~$ sudo apt install ./code_1.99.3-1744761595_amd64.deb
+cry0l1t3@ubuntu:~$ code
+```
+
+При первом запуске может пройти несколько секунд. После полного запуска вы увидите следующее окно, где вы можете начать настраивать и кастомизировать свою IDE VSCode.
+
+![Экран настройки Visual Studio Code с опциями использования функций AI с Copilot, вместе с редактором кода, отображающим файл проекта](https://academy.hackthebox.com/storage/modules/87/code2.png)
+
+Давайте установим цветовую схему IDE HackTheBox. Сначала выполните команды, показанные ниже:
+
+```bash
+Ctrl + p
+ext install silofy.hackthebox
+```
+
+Это установит цветовую схему HackTheBox, которую вы можете установить в качестве предпочтительной темы для VSCode.
+
+![Visual Studio Code, показывающий расширение темы HackTheBox с опциями установки цветовой темы, отключения или удаления](https://academy.hackthebox.com/storage/modules/87/code3.png)
+
+После этого ваш VSCode будет выглядеть примерно так:
+
+![Visual Studio Code, показывающий расширение темы HackTheBox с опциями установки цветовой темы, отключения или удаления, и деталями установки](https://academy.hackthebox.com/storage/modules/87/code4.png)
+
+Когда мы вставляем фрагмент кода Python в новый файл, красивый набор цветов подчеркивает структуру кода, делая его гораздо более читаемым и удобным для редактирования.
+
+![Visual Studio Code с Python-скриптом, демонстрирующим извлечение значений словаря и сортировку уникальных значений](https://academy.hackthebox.com/storage/modules/87/code5.png)
+
+Специально для разработки на Python мы подготовили список полезных расширений, которые еще больше улучшат ваш опыт работы с VSCode.
+
+## Установка расширений
+
+| **Общие** | **Python** | **Docker** | **Git** | **AI** |
+| --- | --- | --- | --- | --- |
+| [Better Comments](https://marketplace.visualstudio.com/items/?itemName=aaron-bond.better-comments) | [Python](https://marketplace.visualstudio.com/items/?itemName=ms-python.python) | [Docker](https://marketplace.visualstudio.com/items/?itemName=ms-azuretools.vscode-docker) | [Gitlens](https://marketplace.visualstudio.com/items/?itemName=eamodio.gitlens) | [Continue](https://marketplace.visualstudio.com/items/?itemName=Continue.continue) |
+| [Material Icon Theme](https://marketplace.visualstudio.com/items/?itemName=PKief.material-icon-theme) | [Python Auto VENV](https://marketplace.visualstudio.com/items/?itemName=WolfiesHorizon.python-auto-venv) | [Remote Containers](https://marketplace.visualstudio.com/items/?itemName=ms-vscode-remote.remote-containers) | | |
+| [Postman for VSCode](https://marketplace.visualstudio.com/items/?itemName=Postman.postman-for-vscode) | [Python Indent](https://marketplace.visualstudio.com/items/?itemName=KevinRose.vsc-python-indent) | | | |
+| [Remote SSH](https://marketplace.visualstudio.com/items/?itemName=ms-vscode-remote.remote-ssh) | [Indent Rainbow](https://marketplace.visualstudio.com/items/?itemName=oderwat.indent-rainbow) | | | |
+| [Quicktype](https://marketplace.visualstudio.com/items/?itemName=quicktype.quicktype) | [Arepl](https://marketplace.visualstudio.com/items/?itemName=almenon.arepl) | | | |
+| [Prettier](https://marketplace.visualstudio.com/items/?itemName=esbenp.prettier-vscode) | | | | |
+| [Peacock](https://marketplace.visualstudio.com/items/?itemName=johnpapa.vscode-peacock) | | | | |
+
+Настоятельно рекомендуется изучить их документацию и понять, как каждое из расширений можно настроить и адаптировать под ваши нужды.
+
+---
+
+## NeoVIM
+
+Neovim — это терминальный текстовый редактор, который предлагает высокую степень настройки и широкий спектр расширений. Он значительно быстрее, чем VSCode, и ориентирован на рабочие процессы, управляемые клавиатурой, что идеально подходит для пользователей, предпочитающих управлять всем в одном экране. Neovim также очень легковесен, требует минимальных ресурсов ОЗУ и ЦП, что делает его хорошо подходящим для обработки нескольких сессий или работы с большими кодовыми базами. Однако Neovim зависит от дополнительных плагинов, таких как DAP для отладки, которые менее интуитивно понятны и требуют ручной настройки.
+
+Теперь давайте загрузим и установим Neovim с помощью команд, показанных ниже:
+
+```bash
+cry0l1t3@ubuntu:~$ curl -LO https://github.com/neovim/neovim/releases/latest/download/nvim-linux-x86_64.tar.gz
+cry0l1t3@ubuntu:~$ sudo rm -rf /opt/nvim
+cry0l1t3@ubuntu:~$ sudo tar -C /opt -xzf nvim-linux-x86_64.tar.gz
+cry0l1t3@ubuntu:~$ echo 'export PATH="$PATH:/opt/nvim-linux-x86_64/bin"' >> ~/.zshrc
+```
+
+Существует предварительно настроенный фреймворк Neovim под названием `NvChad`, который включает в себя улучшенный пользовательский интерфейс, время запуска и подобранные плагины, чтобы сделать его подобным IDE. Давайте загрузим его и заменим конфигурацию Neovim по умолчанию на новую.
+
+```bash
+cry0l1t3@ubuntu:~$ # NvChad
+cry0l1t3@ubuntu:~$ git clone https://github.com/NvChad/starter ~/.config/nvim
+```
+
+Если вы не знакомы с Neovim/Vim и его функциональностью, мы рекомендуем вам пройти встроенный учебник, который научит основам Neovim/Vim. Чтобы запустить `vimtutor`, вы можете использовать следующую команду:
+
+```bash
+cry0l1t3@ubuntu:~$ vimtutor
+```
+
+Пропуск учебника может привести к неловкой ситуации, когда вы поймете, что не можете выйти из Neovim/Vim.
+
+Смело продвигаясь дальше, когда мы запускаем Neovim, выполнив команду `nvim`, мы видим следующий экран.
+
+![Интерфейс Neovim, показывающий управление плагинами с опциями, такими как Установка, Обновление и Синхронизация. Отображает новости NvChad и обновления статуса плагинов](https://academy.hackthebox.com/storage/modules/87/code6.png)
+
+Еще раз, мы рекомендуем прочитать документацию, чтобы ознакомиться с использованием vim, так как Neovim/Vim позволит вам писать и редактировать код или файлы `очень быстро`, когда вы станете профессионалом. Кроме того, NvChad предоставляет выбор темы, который мы можем открыть с помощью клавиши `Space + t + h`. Здесь мы найдем множество предустановленных тем и сможем выбрать ту, которая соответствует нашим вкусам.
+
+![Интерфейс Tmux, отображающий меню выбора цветовой схемы с различными темами, такими как 'jabuti' и 'material-deep-ocean'](https://academy.hackthebox.com/storage/modules/87/code7.png)
