@@ -74,7 +74,7 @@ Linux — это операционная система, как Windows, iOS, A
 
 Операционная система Linux структурирована в древовидной иерархии и документирована в [Стандарте иерархии файловой системы](http://www.pathname.com/fhs/) (FHS). Linux структурирован со следующими стандартными каталогами верхнего уровня:
 
-![Диаграмма иерархии файловой системы Linux с корневым каталогом, разветвляющимся на папки: /bin, /boot, /dev, /etc, /lib, /media, /mnt, /opt, /home, /run, /root, /proc, /sys, /tmp, /usr, /var.](https://academy.hackthebox.com/storage/modules/34/redesigned/NEW_filesystem.png)
+![Диаграмма иерархии файловой системы Linux с корневым каталогом, разветвляющимся на папки: /bin, /boot, /dev, /etc, /lib, /media, /mnt, /opt, /home, /run, /root, /proc, /sys, /tmp, /usr, /var.](https://academy.hackthebox.com/storage/modules/18/NEW_filesystem.png)
 
 | **Путь** | **Описание** |
 |----------|--------------|
