@@ -382,7 +382,7 @@ LAN (Local Area Network, Локальная сеть) и WLAN (Wireless Local Ar
 
 #### Прямой прокси
 
-![Диаграмма, показывающая как хост A отправляет HTTP-запрос через Прямой прокси в Интернет, достигая Веб-сервера. Хост B также подключен.](https://academy.hackthebox.com/storage/modules/34/redesigned/reverse_proxy.png)
+![Диаграмма, показывающая как хост A отправляет HTTP-запрос через Прямой прокси в Интернет, достигая Веб-сервера. Хост B также подключен.](https://academy.hackthebox.com/storage/modules/34/redesigned/forward_proxy.png)
 
 ---
 
@@ -398,7 +398,7 @@ LAN (Local Area Network, Локальная сеть) и WLAN (Wireless Local Ar
 
 #### Обратный прокси
 
-![Диаграмма, показывающая как хост А отправляет HTTP-запрос через Интернет, проходя через брандмауэры, Обратный прокси и достигая Веб-сервера. Хост B также подключен.](https://academy.hackthebox.com/storage/modules/34/redesigned/topo_reverse_proxy.png)
+![Диаграмма, показывающая как хост А отправляет HTTP-запрос через Интернет, проходя через брандмауэры, Обратный прокси и достигая Веб-сервера. Хост B также подключен.](https://academy.hackthebox.com/storage/modules/34/redesigned/reverse_proxy.png)
 
 ---
 
