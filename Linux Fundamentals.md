@@ -599,3 +599,199 @@ Solrikk@htb[/htb]$ tree .
 ### Дополнительное упражнение:
 
 Используйте инструменты, которые мы уже изучили, чтобы понять, как удалять файлы и директории. Имейте в виду, что онлайн-исследование является ценной частью процесса обучения - это не обман. Сейчас вы не проходите тестирование, а строите свои знания. Поиск решений в интернете может познакомить вас с различными подходами и альтернативными методами, предоставляя более широкое понимание того, как работают вещи, и помогая открыть наиболее эффективные способы решения проблем.
+
+
+
+
+
+
+
+# 1.6 Редактирование файлов
+
+---
+
+После изучения создания файлов и каталогов, давайте перейдем к работе с этими файлами. В Linux существует несколько способов редактирования файлов, при этом одними из самых распространенных текстовых редакторов являются `Vi` и `Vim`. Однако мы начнем с редактора `Nano`, который используется реже, но его проще понять.
+
+Чтобы создать и отредактировать файл с помощью Nano, вы можете указать имя файла непосредственно в качестве первого параметра при запуске редактора. Например, чтобы создать и открыть новый файл `notes.txt`, вы можете использовать следующую команду:
+
+```shell-session
+Solrikk@htb[/htb]$ nano notes.txt
+```
+
+Эта команда откроет редактор `Nano`, позволяя вам сразу начать редактирование файла `notes.txt`. Простой интерфейс Nano (также называемый "`pager`") делает его отличным выбором для быстрого редактирования текстовых файлов, особенно когда вы только начинаете.
+
+#### Редактор Nano
+
+```shell-session
+  GNU nano 2.9.3                                    notes.txt                                              
+
+Here we can type everything we want and make our notes.▓
+
+
+^G Get Help    ^O Write Out   ^W Where Is    ^K Cut Text    ^J Justify     ^C Cur Pos     M-U Undo
+^X Exit        ^R Read File   ^\ Replace     ^U Uncut Text  ^T To Spell    ^_ Go To Line  M-E Redo
+```
+
+Ниже мы видим две строки с краткими описаниями. Символ `caret` (`^`) означает нашу клавишу "`[CTRL]`".
+Например, если мы нажмем `[CTRL + W]`, в нижней части редактора появится строка "`Search:`", где мы можем ввести слово или слова, которые ищем.
+Если теперь мы ищем слово "`we`" и нажимаем `[ENTER]`, курсор перейдет к первому слову, которое соответствует запросу.
+
+```shell-session
+GNU nano 2.9.3                                    notes.txt                                              
+
+Here ▓we can type everything we want and make our notes.
+
+Search:   notes                                                                                            
+^G Get Help    M-C Case Sens  M-B Backwards  M-J FullJstify ^W Beg of Par  ^Y First Line  ^P PrevHstory
+^C Cancel      M-R Regexp     ^R Replace     ^T Go To Line  ^O End of Par  ^V Last Line   ^N NextHstory
+```
+
+Чтобы перейти к следующему совпадению с курсором, нажимаем `[CTRL + W]` снова и подтверждаем с помощью `[ENTER]` без ввода дополнительной информации.
+
+```shell-session
+GNU nano 2.9.3                                    notes.txt                                              
+
+Here we can type everything ▓we want and make our notes.
+
+Search [we]:                                                                                               
+^G Get Help    M-C Case Sens  M-B Backwards  M-J FullJstify ^W Beg of Par  ^Y First Line  ^P PrevHstory
+^C Cancel      M-R Regexp     ^R Replace     ^T Go To Line  ^O End of Par  ^V Last Line   ^N NextHstory
+```
+
+Теперь мы можем сохранить файл, нажав `[CTRL + O]` и подтвердив имя файла с помощью `[ENTER]`.
+
+```shell-session
+GNU nano 2.9.3                                    notes.txt                                              
+
+Here we can type everything we want and make our notes.
+
+File Name to Write: notes.txt▓                                                                           
+^G Get Help    M-C Case Sens  M-B Backwards  M-J FullJstify ^W Beg of Par  ^Y First Line  ^P PrevHstory
+^C Cancel      M-R Regexp     ^R Replace     ^T Go To Line  ^O End of Par  ^V Last Line   ^N NextHstory
+```
+
+После сохранения файла мы можем выйти из редактора с помощью `[CTRL + X]`.
+
+#### Обратно в Shell
+
+Для просмотра содержимого файла мы можем использовать команду `cat`.
+
+```shell-session
+Solrikk@htb[/htb]$ cat notes.txt
+
+Here we can type everything we want and make our notes.
+```
+
+В системах Linux есть несколько файлов, которые могут быть чрезвычайно полезны для тестировщиков на проникновение из-за неправильно настроенных разрешений или недостаточных настроек безопасности со стороны администраторов. Одним из таких важных файлов является файл `/etc/passwd`. Этот файл содержит важную информацию о пользователях системы, такую как их имена пользователей, идентификаторы пользователей (`UID`), идентификаторы групп (`GID`) и домашние каталоги.
+
+Исторически файл `/etc/passwd` также хранил хеши паролей, но теперь эти хеши обычно хранятся в `/etc/shadow`, который имеет более строгие разрешения. Однако, если разрешения для `/etc/passwd` или других важных файлов установлены неправильно, это может привести к раскрытию конфиденциальной информации или возможностям повышения привилегий.
+
+Как тестировщики на проникновение, выявление файлов с неправильными правами или разрешениями может предоставить ключевые сведения о потенциальных уязвимостях, которые могут быть использованы, например, слабые учетные записи пользователей или неправильно настроенный доступ к файлам, который в противном случае должен быть ограничен. Понимание этих файлов жизненно важно при оценке состояния безопасности системы.
+
+---
+
+## VIM
+
+`Vim` — это редактор с открытым исходным кодом для всех видов ASCII-текста, так же как и Nano. Это улучшенный клон предыдущего Vi. Это чрезвычайно мощный редактор, который сосредоточен на самом главном, а именно на редактировании текста. Для задач, выходящих за рамки этого, Vim предоставляет интерфейс к внешним программам, таким как `grep`, `awk`, `sed` и т.д., которые могут обрабатывать свои конкретные задачи гораздо лучше, чем соответствующая функция, непосредственно реализованная в редакторе. Это делает редактор маленьким и компактным, быстрым, мощным, гибким и менее подверженным ошибкам.
+
+Vim следует принципу Unix: много маленьких специализированных программ, которые хорошо протестированы и проверены, при комбинировании и взаимодействии друг с другом приводят к гибкой и мощной системе.
+
+#### Vim
+
+```shell-session
+Solrikk@htb[/htb]$ vim
+```
+
+```shell-session
+  1 $
+~
+~                              VIM - Vi IMproved                                
+~                                                                               
+~                               version 8.0.1453                                
+~                           by Bram Moolenaar et al.                            
+~           Modified by pkg-vim-maintainers@lists.alioth.debian.org             
+~                 Vim is open source and freely distributable                   
+~                                                                               
+~                           Sponsor Vim development!                            
+~                type  :help sponsor<Enter>    for information                  
+~                                                                               
+~                type  :q<Enter>               to exit                          
+~                type  :help<Enter>  or  <F1>  for on-line help                 
+~                type  :help version8<Enter>   for version info                 
+~                                                                               
+                                                                         
+                                                                    0,0-1         All
+```
+
+В отличие от Nano, `Vim` — это модальный редактор, который может различать ввод текста и ввод команд. Vim предлагает в общей сложности шесть фундаментальных режимов, которые облегчают нашу работу и делают этот редактор таким мощным:
+
+| **Режим** | **Описание** |
+|------------|--------------|
+| `Normal` | В нормальном режиме все вводимые данные рассматриваются как команды редактора. Таким образом, нет вставки введенных символов в буфер редактора, как это происходит в большинстве других редакторов. После запуска редактора мы обычно находимся в нормальном режиме. |
+| `Insert` | За некоторыми исключениями, все вводимые символы вставляются в буфер. |
+| `Visual` | Визуальный режим используется для выделения непрерывной части текста, которая будет визуально выделена. Перемещая курсор, мы изменяем выделенную область. Выделенную область затем можно редактировать различными способами, например, удалить, скопировать или заменить её. |
+| `Command` | Позволяет нам вводить однострочные команды внизу редактора. Это может использоваться для сортировки, замены разделов текста или их удаления, например. |
+| `Replace` | В режиме замены вновь введенный текст будет перезаписывать существующие символы текста, если только на текущей позиции курсора нет больше старых символов. Затем вновь введенный текст будет добавлен. |
+| `Ex` | Эмулирует поведение текстового редактора [Ex](https://man7.org/linux/man-pages/man1/ex.1p.html), одного из предшественников `Vim`. Предоставляет режим, в котором мы можем выполнять несколько команд последовательно, не возвращаясь в нормальный режим после каждой команды. |
+
+Когда у нас открыт редактор Vim, мы можем перейти в командный режим, набрав "`:`", а затем набрав "`q`", чтобы закрыть Vim.
+
+```shell-session
+  1 $
+~
+~                              VIM - Vi IMproved                                
+~                                                                               
+~                               version 8.0.1453                                
+~                           by Bram Moolenaar et al.                            
+~           Modified by pkg-vim-maintainers@lists.alioth.debian.org             
+~                 Vim is open source and freely distributable                   
+~                                                                               
+~                           Sponsor Vim development!                            
+~                type  :help sponsor<Enter>    for information                  
+~                                                                               
+~                type  :q<Enter>               to exit                          
+~                type  :help<Enter>  or  <F1>  for on-line help                 
+~                type  :help version8<Enter>   for version info                 
+~                                                                               
+:q▓
+```
+
+Vim предлагает отличную возможность под названием `vimtutor` для практики и ознакомления с редактором. Поначалу он может показаться очень сложным и трудным, но это ощущение будет длиться недолго. Эффективность, которую мы получаем от Vim, когда привыкаем к нему, огромна. Вход в режим обучения в редакторе `vim` можно осуществить с помощью командного режима `Command` `Tutor` или с помощью команды `vimtutor` в оболочке.
+
+#### VimTutor
+
+```shell-session
+Solrikk@htb[/htb]$ vimtutor
+```
+
+```shell-session
+===============================================================================
+=    W e l c o m e   t o   t h e   V I M   T u t o r    -    Version 1.7      =
+===============================================================================
+
+     Vim is a very powerful editor that has many commands, too many to
+     explain in a tutor such as this.  This tutor is designed to describe
+     enough of the commands that you will be able to easily use Vim as
+     an all-purpose editor.
+
+     The approximate time required to complete the tutor is 25-30 minutes,
+     depending upon how much time is spent with experimentation.
+
+     ATTENTION:
+     The commands in the lessons will modify the text.  Make a copy of this
+     file to practice on (if you started "vimtutor" this is already a copy).
+
+     It is important to remember that this tutor is set up to teach by
+     use.  That means that you need to execute the commands to learn them
+     properly.  If you only read the text, you will forget the commands!
+
+     Now, make sure that your Caps-Lock key is NOT depressed and press
+     the   j   key enough times to move the cursor so that lesson 1.1
+     completely fills the screen.
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+```
+
+> ### Дополнительное упражнение:
+> 
+> Поиграйте с vimtutor. Познакомьтесь с редактором и поэкспериментируйте с его функциями.
+
