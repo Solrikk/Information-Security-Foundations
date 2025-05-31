@@ -984,7 +984,7 @@ Solrikk@htb[/htb]$ curl https://academy.hackthebox.com
 
 ## Apache
 
-![Apache логотип с пером.](https://academy.hackthebox.com/storage/modules/75/apache.webp)
+![Apache логотип с пером.](https://academy.hackthebox.com/storage/modules/75/apache.png)
 
 **[Apache](https://www.apache.org/)** 'или `httpd`' является наиболее распространенным веб-сервером в интернете, обслуживающим более `40%` всех интернет-сайтов. `Apache` обычно предустановлен в большинстве дистрибутивов `Linux` и также может быть установлен на серверы Windows и macOS.
 
@@ -999,7 +999,7 @@ Solrikk@htb[/htb]$ curl https://academy.hackthebox.com
 
 ## NGINX
 
-![NGINX логотип.](https://academy.hackthebox.com/storage/modules/75/nginx.webp)
+![NGINX логотип.](https://academy.hackthebox.com/storage/modules/75/nginx.png)
 
 **[NGINX](https://www.nginx.com/)** является вторым по распространенности веб-сервером в интернете, обслуживающим примерно `30%` всех интернет-сайтов. `NGINX` фокусируется на обслуживании множества одновременных веб-запросов с относительно низкой нагрузкой на память и процессор, используя для этого асинхронную архитектуру. Это делает `NGINX` очень надежным веб-сервером для популярных веб-приложений и ведущих предприятий по всему миру, поэтому он является самым популярным веб-сервером среди высоконагруженных сайтов, с около 60% из топ-100,000 сайтов, использующих `NGINX`.
 
@@ -1012,7 +1012,7 @@ Solrikk@htb[/htb]$ curl https://academy.hackthebox.com
 
 ## IIS
 
-![Microsoft IIS логотип.](https://academy.hackthebox.com/storage/modules/75/iis.webp)
+![Microsoft IIS логотип.](https://academy.hackthebox.com/storage/modules/75/iis.png)
 
 **[IIS (Internet Information Services)](https://en.wikipedia.org/wiki/Internet_Information_Services)** является третьим по распространенности веб-сервером в интернете, обслуживающим около `15%` всех интернет-сайтов. `IIS` разрабатывается и поддерживается Microsoft и в основном работает на серверах Microsoft Windows. `IIS` обычно используется для размещения веб-приложений, разработанных для фреймворка Microsoft .NET, но также может использоваться для размещения веб-приложений, разработанных на других языках, таких как `PHP`, или для размещения других типов служб, таких как `FTP`. Кроме того, `IIS` очень хорошо оптимизирован для интеграции с Active Directory и включает такие функции, как `Windows Auth` для аутентификации пользователей с использованием Active Directory, позволяя им автоматически входить в веб-приложения.
 
